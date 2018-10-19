@@ -1,0 +1,21 @@
+<a href="/"><h1>Threadit!</h1></a>
+<h2>The front thread on the internet.</h2>
+<section>
+{{#each posts}}
+    <article>
+        <h3><a href="/post/{{this._id}}">{{this.title}}</a></h3>
+        <p>{{this.url}}</p>
+         <a href="/n/{{this.subreddit}}">/n/{{this.subreddit}}</a>
+        <div>{{this.summary}}</div>
+    </article>
+{{/each}}
+</section>
+<ul>
+    {{#if currentUser}}
+        <li><a href="/logout">Logout</a></li>
+    {{else}}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/sign-up">Sign Up</a></li>
+    {{/if}}
+    <a href="/posts/new">create new post</a>
+</ul>
