@@ -60,7 +60,7 @@ module.exports = (app) => {
                 }
              ).populate('author').then( (post)=>{
                 console.log("Post id path")
-                res.render('view-post',  { post } );
+                res.render('view-posts',  { post } );
             }).catch(( err )=>{
                 console.log( "\n*******Error getting post ******** \n",err.message );
                 res.status(404).render("/error", {error: err.message})

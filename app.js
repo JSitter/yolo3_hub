@@ -23,6 +23,11 @@ mongoose.Promise = global.Promise;
 // log database errors to console
 mongoose.connection.on('error', console.error.bind(console, "MongoDB Connection error >^..^< :"));
 
+//Require Models
+const User = require('./models/user.js');
+const Comment = require('./models/comment.js');
+const Post = require('./models/post.js');
+
 //Use CookieParser in express app
 app.use(cookieParser());
 
@@ -61,14 +66,20 @@ app.use(checkAuth);
  * Setup root landing page
  *************************************/
 app.get('/', function (req, res) {
-    //console.log(req.cookies);
+    if(!req.user){
+        res.render('splash');
+    }else{
+        User.findById(req.user).populate(
+           'records'
+        ).then((u)=>{
+            res.render('all-posts', {user: u});
+        }).catch((err)=>{
+            console.log("user page error: ",err.message)
+        })
 
-    //get current logged in user id
-    var currentUser = req.user;
-    res.render('splash')
-    // Post.find().exec(function (err, posts) {
-    //     res.render('posts-index', { posts: posts , title: "Welcome to Threadit!", currentUser: currentUser});
-    //   });
+    }
+
+
 });
 
 /**************************************
