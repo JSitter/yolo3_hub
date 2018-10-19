@@ -166,6 +166,7 @@ const Auth = require('./controllers/auth.js')(app);
 require('./controllers/post.js')(app)
 
 // Listen on port 8082
-app.listen(8182, function () {
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
     console.log('Yolo listening on port 8082!');
    });
