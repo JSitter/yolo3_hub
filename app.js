@@ -14,7 +14,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 //Connect to DB
-mongoose.connect('mongodb://localhost:27017/yolo');
+mongoose.connect(process.env.MONGODB_URI);
 
 
 //User javascript global promise instead of mongoose's deprecated
